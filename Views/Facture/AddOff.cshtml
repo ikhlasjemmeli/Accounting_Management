@@ -1,0 +1,359 @@
+﻿@model WebApplication2.Models.AddFacture;
+@{
+    ViewData["Title"] = "Create offer";
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add a new offer</title>
+    <style>
+        .mode-toggle {
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+            position: relative;
+            border-radius: 17px;
+            background-color: #ccc;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .mode-toggle-slider {
+            width: 28px;
+            height: 28px;
+            position: absolute;
+            border-radius: 50%;
+            background-color: white;
+            top: 3px;
+            left: 3px;
+            transition: transform 0.3s;
+        }
+
+        .dark-mode .mode-toggle {
+            background-color: #333;
+        }
+
+        .dark-mode .mode-toggle-slider {
+            transform: translateX(26px);
+        }
+
+        .dark-mode label {
+            color: #7688A6;
+        }
+
+        .dark-mode input {
+            background: #7688A6;
+            color: white;
+        }
+
+        .dark-mode .cadre-blanc {
+            color: #7688A6;
+        }
+
+        html {
+            overflow-x: hidden;
+        }
+
+        body.dark {
+            --light: #0C0C1E;
+            --grey: #060714;
+            --dark: #FBFBFB;
+        }
+
+        body {
+            background-color: #B0C4DE; /* Vert clair */
+            overflow-x: hidden;
+            transition: background-color 0.3s, color 0.3s;
+            font-family: Arial, sans-serif;
+            color: #333; /* Couleur du texte */
+        }
+
+        #content {
+            position: relative;
+            width: calc(100% - 280px);
+            left: 280px;
+            transition: .3s ease;
+        }
+
+        #sidebar.hide ~ #content {
+            width: calc(100% - 60px);
+            left: 60px;
+        }
+
+        #content nav {
+            height: 56px;
+            background: var(--light);
+            padding: 0 24px;
+            display: flex;
+            align-items: center;
+            grid-gap: 24px;
+            font-family: var(--lato);
+            position: sticky;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
+
+            #content nav::before {
+                content: '';
+                position: absolute;
+                width: 40px;
+                height: 40px;
+                bottom: -40px;
+                left: 0;
+                border-radius: 50%;
+                box-shadow: -20px -20px 0 var(--light);
+            }
+
+            #content nav a {
+                color: var(--dark);
+            }
+
+            #content nav h1 {
+                text-align: left;
+            }
+
+       
+
+        h1 {
+            color: #0066CC; /* Bleu */
+        }
+
+        /* Styling du cadre blanc */
+        .cadre-blanc {
+            border: 1px solid #0066CC; /* Bleu */
+            padding: 20px;
+            margin-bottom: 20px;
+            background-color: #FFFFFF; /* Blanc */
+            max-width: 800px;
+            margin: 0 auto;
+            border-radius: 10px;
+        }
+
+        /* Styling du tableau */
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            background-color: #FFFFFF; /* Blanc */
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #0066CC; /* Bleu */
+            padding: 10px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #0066CC; /* Bleu */
+            color: #FFFFFF; /* Blanc */
+        }
+
+        /* Styling des champs de texte */
+        input[type="text"], input[type="date"], input[type="number"] {
+            padding: 8px;
+            width: 100%;
+            box-sizing: border-box;
+            border: 1px solid #999; /* Gris clair */
+            border-radius: 5px;
+        }
+
+        /* Styling du bouton "Ajouter" */
+        button.ajouter {
+            padding: 8px 12px;
+            background-color: #0066CC; /* Bleu */
+            color: #FFFFFF; /* Blanc */
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+            button.ajouter:hover {
+                background-color: #0099FF; /* Bleu plus clair au survol */
+            }
+
+        /* Styling du bouton "X" */
+        button.supprimer {
+            padding: 6px 10px;
+            background-color: #FF0000; /* Rouge */
+            color: #FFFFFF; /* Blanc */
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+            button.supprimer:hover {
+                background-color: #FF3333; /* Rouge plus clair au survol */
+            }
+
+        /* Styling du bouton "Submit" */
+        .bouton-submit {
+            padding: 10px 15px;
+            background-color: #0099FF; /* Bleu */
+            color: #FFFFFF; /* Blanc */
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+            .bouton-submit:hover {
+                background-color: #0066CC; /* Bleu plus foncé au survol */
+            }
+    </style>
+    <script src="~\lib\jquery\dist\jquery.min.js"></script>
+</head>
+<body>
+    
+    <section id="content">
+        <!-- NAVBAR -->
+        <nav>
+            <h1>Add a new offer</h1>
+            <div class="mode-toggle" id="modeToggle">
+                <div class="mode-toggle-slider"></div>
+            </div>
+
+
+        </nav>
+        <!-- NAVBAR -->
+    </section>
+    <form action="AddOff" method="post">
+
+        <!-- Premier cadre blanc contenant les informations de la facture -->
+        <div class="cadre-blanc">
+            <h2>Customer details</h2>
+            <label for="name">Customer name:</label>
+            <input type="text" id="name" name="name" asp-for="Name"><br>
+
+            <label for="adresse">Address:</label>
+            <input type="text" id="adresse" name="adresse" asp-for="Adresse"><br>
+
+            <label for="rue">Street:</label>
+            <input type="text" id="rue" name="rue" asp-for="Rue"><br>
+
+            <label for="codePostal">Postal code:</label>
+            <input type="text" id="codePostal" name="codePostal" asp-for="CodePostal"><br>
+
+            <label for="pays">Country:</label>
+            <input type="text" id="pays" name="pays" asp-for="Pays"><br>
+
+            <label for="numfac">Invoice number:</label>
+            <input type="text" id="numfac" name="numfac" asp-for="Numfac"><br>
+
+            <label for="numClient">Customer number:</label>
+            <input type="text" id="numClient" name="numClient" asp-for="Numclient"><br>
+
+            <label for="startDate">Start date:</label>
+            <input type="date" id="startDate" name="startDate" asp-for="StartDate"><br>
+
+            <label for="endDate">Expiration date:</label>
+            <input type="date" id="endDate" name="endDate" asp-for="EndDate">
+        </div>
+
+        <!-- Deuxième cadre blanc contenant la zone de tête et le tableau -->
+        <div class="cadre-blanc">
+            <div class="zone-tete">
+                <h2>More information</h2>
+                <label for="typ">Document title:</label>
+                <input type="text" id="typ" name="typ" asp-for="Typ" value="Offer" readonly>
+                <div>
+                    <label for="total">Total of all lines:</label>
+                    <input type="text" id="total" name="total" value="0" asp-for="Total" readonly>
+                </div>
+            </div>
+
+            <!-- Tableau pour les positions/produits -->
+            <table id="tableFacture">
+                <thead>
+                    <tr>
+                        <th>Position</th>
+                        <th>Product</th>
+                        <th>Quantity</th>
+                        <th>Price</th>
+                        <th>Tax</th>
+                        <th>Total</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Ligne vide ajoutée dynamiquement -->
+                </tbody>
+            </table>
+            <button class="ajouter" type="button" onclick="ajouterLigne()">Add</button>
+        </div>
+
+        <button class="bouton-submit" type="submit">Submit</button>
+    </form>
+
+    <script>
+        function ajouterLigne() {
+            var table = document.getElementById("tableFacture").getElementsByTagName('tbody')[0];
+
+            // Créer une nouvelle ligne
+            var newRow = table.insertRow(table.rows.length);
+
+            // Ajouter les cellules à la ligne
+            var cellPosition = newRow.insertCell(0);
+            var cellProduit = newRow.insertCell(1);
+            var cellQuantite = newRow.insertCell(2);
+            var cellPrix = newRow.insertCell(3);
+            var cellTVA = newRow.insertCell(4);
+            var cellTotal = newRow.insertCell(5);
+            var cellAction = newRow.insertCell(6);
+
+            // Remplir les cellules avec des champs vides et bouton "X"
+            cellPosition.innerHTML = '<input type="text" name="position[]">';
+            cellProduit.innerHTML = '<input type="text" name="produit[]">';
+            cellQuantite.innerHTML = '<input type="number" name="quantite[]" oninput="calculerTotalLigne(this)">';
+            cellPrix.innerHTML = '<input type="number" name="prix[]" oninput="calculerTotalLigne(this)">';
+            cellTVA.innerHTML = '<input type="number" name="tva[]" oninput="calculerTotalLigne(this)">';
+            cellTotal.innerHTML = '<span>0.00</span>';
+            cellAction.innerHTML = '<button class="supprimer" type="button" onclick="supprimerLigne(this)">X</button>';
+        }
+
+        function supprimerLigne(button) {
+            var row = button.parentNode.parentNode;
+            row.parentNode.removeChild(row);
+            calculerTotalGeneral();
+        }
+
+        function calculerTotalLigne(input) {
+            var row = input.parentNode.parentNode;
+            var quantite = parseFloat(row.cells[2].querySelector('input').value);
+            var prix = parseFloat(row.cells[3].querySelector('input').value);
+            var tva = parseFloat(row.cells[4].querySelector('input').value);
+
+            if (!isNaN(quantite) && !isNaN(prix) && !isNaN(tva)) {
+                var total = (prix * quantite) + ((prix * quantite) * (tva / 100));
+                row.cells[5].querySelector('span').innerText = total.toFixed(2);
+                calculerTotalGeneral();
+            }
+        }
+        function calculerTotalGeneral() {
+            var table = document.getElementById("tableFacture").getElementsByTagName('tbody')[0];
+            var totalGeneral = 0;
+
+            for (var i = 0; i < table.rows.length; i++) {
+                var totalLigne = parseFloat(table.rows[i].cells[5].querySelector('span').innerText);
+                totalGeneral += isNaN(totalLigne) ? 0 : totalLigne;
+            }
+
+            var totalArrondi = Math.round(totalGeneral);
+            document.getElementById("total").value = totalArrondi;
+        }
+        const modeToggle = document.getElementById('modeToggle');
+
+        let isDarkMode = false;
+
+        modeToggle.addEventListener('click', () => {
+            isDarkMode = !isDarkMode;
+            const body = document.body;
+            document.body.style.backgroundColor = isDarkMode ? '#7688A6' : '#B0C4DE';
+            document.body.style.color = isDarkMode ? '#B0C4DE' : '#7688A6';
+            // modeToggle.textContent = isDarkMode ? 'Mode Blanc' : 'Mode Noir';
+            body.classList.toggle('dark-mode');
+
+        });
+    </script>
+</body>
+</html>
+

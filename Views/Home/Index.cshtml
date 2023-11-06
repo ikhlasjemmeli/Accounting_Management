@@ -1,0 +1,193 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="fonts/font-awesome.min.css">
+  <style>
+    body{
+      width: 100%;
+      min-height: 100vh;
+      overflow: hidden;
+            background: #1E90FF;
+    }
+    section{
+      width: 100%;
+      position: relative;
+    }
+    .container{
+      display: flex;
+      width: 100%;
+      min-height: 100vh;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+    .text-container{
+      width: 50%;
+      padding-left: 5rem;
+      padding-top: 5rem;
+
+    }
+    .text-container h2{
+      font-size: 6vw;
+      font-weight: 1300;
+      line-height: 6vw;
+      text-transform: capitalize;
+    }
+    .text-container h2::first-line{
+      color: #fff;
+      letter-spacing: 5px;
+      text-shadow: 0 5px 10px rgba(0,0 ,0, 0.5);
+    }
+    .text-container h5{
+      color: #fff;
+      font-size: 2vw;
+      font-weight: 300;
+      text-align: left;
+      margin-top: 20px;
+      margin-right: 10vw;
+      text-transform: capitalize;
+    }
+    .text-container p{
+      color: #fff;
+      font-size: 1vw;
+      font-weight: 400;
+      
+      margin-top: 30px;
+    }
+    .image-container{
+      display: flex;
+      width: 50%;
+      height: 100%;
+     
+      align-items: center;
+      justify-content: center;
+      position: relative;
+           
+    }
+    .imgbox{
+      position: relative;
+      min-width: 100vh;
+      margin-right: 1vw;
+      z-index: 1;
+            
+          
+    }
+    .imgbox img{
+      height: 80%;
+      width: 80%;
+      object-fit: cover;
+                top: 30%;
+                left: 0;
+    }
+
+    .icons{
+      position: fixed;
+      top: 50%;
+      right: -16vw;
+      transform: translateY(-50%);
+      z-index: 1000;
+      
+     
+    }
+
+            .icons .fa-facebook {
+      width: 20VW;
+      height:4vw;
+      padding: 1vw;
+      font-size: 0.5vw;
+      cursor: pointer;
+      background: #fff;
+      transition: 0.5s ease;
+                border-radius: 2vw;
+      
+    }
+
+            .icons .fa-facebook span {
+      position: relative;
+      font-size: 1.4vw;
+      bottom: 0.3vw;
+      margin-left: 1.5vw;
+      text-transform:lowercase;
+    }
+
+                .icons .fa-facebook img{
+                    width:2vw;
+                    height:2vw;
+                }
+
+            .icons .fa-facebook:hover {
+      color:#4369e6 ;
+      transform: translateX(-11vw);
+    }
+        <!--
+    .animblob{
+      position: absolute;
+      top: 30%;
+      left: 40%;
+      height: 30vw;
+      width: 30vw;
+      transform: translate(-50%,-50%);
+      background:#fff ;
+      animation: animate_blob 5s linear infinite;
+            0%,100%
+
+        {
+            border-radius: 45% 55% 70% 35% / 70% 30% 90% 40%;
+    }
+
+       
+    
+    keyframes animate_blob{
+      0%,100%{
+        border-radius: 45% 55% 70%  35% / 70% 30% 90% 40%;
+
+      }
+      25%{
+        border-radius: 55% 45% 30%  35% / 50% 30% 60% 10%;
+      }
+      50%{
+        border-radius: 65% 35% 35%  65% / 40% 60% 30% 70%;
+      }
+      25%{
+        border-radius: 35% 65% 60%  40% / 70% 30% 40% 60%;
+      }
+
+        } -->
+  </style>
+</head>
+<body>
+    <section>
+   <div class="container">
+   <div class="text-container">
+                <h2>Accounting <br>management</h2>
+     <h5>Ikhlas | Jemmali</h5>
+                <p>This application was developed during a summer internship for accounting management. You can manage invoices, confirmations, offers and delivery notes. You can also download a report.</p>
+   </div>
+   <div class="image-container">
+    <div class="imgbox">
+      <img src="images/TT-removebg-preview.png">
+                   
+
+   
+   </div> 
+   <div class="icons">
+            <div class="fa-facebook">
+            <img src="images/facebook-f.svg" >
+            <span ><a href="https://www.facebook.com/ikh.las.7587/">Facebook</a></span>
+            </div>
+            <div class="fa-facebook">
+                <img src="images/github.svg">
+            <span><a href="https://github.com/ikhlasjemmeli">Github</a></span><br>
+            </div>
+                <div class="fa-facebook">
+                    <img src="images/linkedin-in.svg">
+            <span><a href="https://www.linkedin.com/in/jemmeli-ikhlas-069830222/">LinkedIn</a></span>
+            </div>
+   </div>
+</section>
+</body>
+
+</html>
